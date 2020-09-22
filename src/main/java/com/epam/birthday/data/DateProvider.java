@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public interface DateProvider {
 
     /**
-     * Getting an LocalDate object
+     * Receiving an LocalDate object
      *
      * @return LocalDate
      */
