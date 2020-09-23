@@ -19,8 +19,8 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        //String ioType = args[0];
-        String ioType = "CONSOLE";
+        String ioType = args[0];
+        //String ioType = "CONSOLE";
 
         InputType inputType = InputType.valueOf(ioType);
         DateProviderFactory dateProviderFactory = InputTypeFactory.createDateProviderFactoryByInputType(inputType);
