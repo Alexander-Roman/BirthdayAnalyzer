@@ -15,33 +15,24 @@ public class ConsoleBirthdayInfoOutput implements BirthdayInfoOutput {
     /**
      * The logger is used to print information to the console
      */
-    static Logger logger = LogManager.getLogger();
+    private final static Logger logger = LogManager.getLogger();
 
     /**
      * BirthdayAnalyzer instance for retrieving data
      */
-    private final BirthdayAnalyzer birthdayAnalyzer;
-
-    {
-        birthdayAnalyzer = new BirthdayAnalyzer();
-    }
+    private final BirthdayAnalyzer birthdayAnalyzer = new BirthdayAnalyzer();
 
     /**
-     * Prints the full date of birth to the console
+     * Prints a complete set of results to the console
      *
      * @param birthday LocalDate
      */
-    public void outputBirthdayDate(LocalDate birthday) {
+    @Override
+    public void outputBirthdayInfo(LocalDate birthday) {
         logger.log(Level.INFO, "Your date of birth: " + birthday.toString());
-    }
-
-    /**
-     * Prints the day of the week of the specified date
-     *
-     * @param birthday LocalDate
-     */
-    public void outputDayOfWeek(LocalDate birthday) {
         logger.log(Level.INFO, "Day of the week: " + birthday.getDayOfWeek());
+        outputAge(birthday);
+        wishHappyBirthday(birthday);
     }
 
     /**
@@ -50,7 +41,7 @@ public class ConsoleBirthdayInfoOutput implements BirthdayInfoOutput {
      *
      * @param birthday LocalDate
      */
-    public void outputAge(LocalDate birthday) {
+    private void outputAge(LocalDate birthday) {
         if (birthdayAnalyzer.wasBorn(birthday)) {
             int age = birthdayAnalyzer.determineAge(birthday);
             logger.log(Level.INFO, "Your age is " + age);
@@ -65,23 +56,11 @@ public class ConsoleBirthdayInfoOutput implements BirthdayInfoOutput {
      *
      * @param birthday LocalDate
      */
-    public void wishHappyBirthday(LocalDate birthday) {
+    private void wishHappyBirthday(LocalDate birthday) {
         int age = birthdayAnalyzer.determineAge(birthday);
         if (birthdayAnalyzer.isToday(birthday) && age >= 0) {
             logger.log(Level.INFO, "Happy Birthday!");
         }
     }
 
-    /**
-     * Prints a complete set of results to the console
-     *
-     * @param birthday LocalDate
-     */
-    @Override
-    public void outputBirthdayInfo(LocalDate birthday) {
-        outputBirthdayDate(birthday);
-        outputDayOfWeek(birthday);
-        outputAge(birthday);
-        wishHappyBirthday(birthday);
-    }
 }
